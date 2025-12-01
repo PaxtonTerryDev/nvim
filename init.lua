@@ -7,6 +7,7 @@ vim.o.tabstop = 4
 vim.o.swapfile = false
 vim.opt.shiftwidth = 4
 vim.o.signcolumn = "yes"
+vim.o.winborder = "rounded"
 
 
 vim.keymap.set('n', '<leader>pv', vim.cmd.Ex)
@@ -19,3 +20,4 @@ require("themes.vague")
 require("plugins.nvim-tree")
 require("plugins.telescope")
 
+vim.cmd("colorscheme vague")
