@@ -1,5 +1,9 @@
 {
   "plugins": {
+    "buffer_manager.nvim": {
+      "rev": "a39ab3851a5487ac39cac4be43715b69349b8df7",
+      "src": "https://github.com/j-morano/buffer_manager.nvim"
+    },
     "gruvbox-material": {
       "rev": "4bfc6983abc249c5943a60d8eb3980a3c2ababe1",
       "src": "https://github.com/sainnhe/gruvbox-material"
