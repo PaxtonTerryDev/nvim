@@ -1,5 +1,9 @@
 {
   "plugins": {
+    "gruvbox-material": {
+      "rev": "4bfc6983abc249c5943a60d8eb3980a3c2ababe1",
+      "src": "https://github.com/sainnhe/gruvbox-material"
+    },
     "mason-lspconfig.nvim": {
       "rev": "0b9bb925c000ae649ff7e7149c8cd00031f4b539",
       "src": "https://github.com/mason-org/mason-lspconfig.nvim"

@@ -1,5 +1,5 @@
-require("themes.vague")
+-- require("themes.vague")
+require("themes.gruvbox-material")
 
-vim.cmd("colorscheme vague")
 
 
