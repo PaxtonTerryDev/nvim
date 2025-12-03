@@ -10,6 +10,7 @@ vim.o.signcolumn = "yes"
 vim.o.winborder = "rounded"
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
+vim.opt.clipboard = 'unnamedplus'
 
 vim.keymap.set('n', '<leader>pv', vim.cmd.Ex)
 vim.keymap.set('n', '<leader>so', ':update<CR> :source<CR>')
