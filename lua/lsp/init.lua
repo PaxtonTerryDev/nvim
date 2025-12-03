@@ -8,6 +8,7 @@ require("mason").setup()
 require("mason-lspconfig").setup()
 
 vim.keymap.set('n', '<leader>lf', vim.lsp.buf.format)
+vim.keymap.set('n', 'K', vim.lsp.buf.hover)
 
 vim.api.nvim_create_autocmd('LspAttach', {
 	callback = function(ev)
@@ -19,3 +20,5 @@ vim.api.nvim_create_autocmd('LspAttach', {
 })
 
 vim.cmd("set completeopt+=noselect")
+
+require("lsp.completion")

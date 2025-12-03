@@ -8,6 +8,10 @@
       "rev": "57e5a8addb8c71fb063ee4acda466c7cf6ad2800",
       "src": "https://github.com/mason-org/mason.nvim"
     },
+    "nvim-autopairs": {
+      "rev": "7a2c97cccd60abc559344042fefb1d5a85b3e33b",
+      "src": "https://github.com/windwp/nvim-autopairs"
+    },
     "nvim-lspconfig": {
       "rev": "effe4bf2e1afb881ea67291c648b68dd3dfc927a",
       "src": "https://github.com/neovim/nvim-lspconfig"

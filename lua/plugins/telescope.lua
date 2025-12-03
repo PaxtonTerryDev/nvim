@@ -14,14 +14,14 @@ vim.api.nvim_create_autocmd('LspAttach', {
   callback = function(ev)
     local opts = { buffer = ev.buf }
     local builtin = require('telescope.builtin')
-    vim.keymap.set('n', '<leader>gd', builtin.lsp_definitions, vim.tbl_extend('force', opts, { desc = 'Go to definition' }))
-    vim.keymap.set('n', '<leader>gi', builtin.lsp_implementations, vim.tbl_extend('force', opts, { desc = 'Go to implementation' }))
-    vim.keymap.set('n', '<leader>gt', builtin.lsp_type_definitions, vim.tbl_extend('force', opts, { desc = 'Go to type definition' }))
-    vim.keymap.set('n', '<leader>gr', builtin.lsp_references, vim.tbl_extend('force', opts, { desc = 'Show references' }))
-    vim.keymap.set('n', '<leader>gD', vim.lsp.buf.declaration, vim.tbl_extend('force', opts, { desc = 'Go to declaration' }))
+    vim.keymap.set('n', '<leader>ld', builtin.lsp_definitions, vim.tbl_extend('force', opts, { desc = 'Go to definition' }))
+    vim.keymap.set('n', '<leader>li', builtin.lsp_implementations, vim.tbl_extend('force', opts, { desc = 'Go to implementation' }))
+    vim.keymap.set('n', '<leader>lt', builtin.lsp_type_definitions, vim.tbl_extend('force', opts, { desc = 'Go to type definition' }))
+    vim.keymap.set('n', '<leader>lr', builtin.lsp_references, vim.tbl_extend('force', opts, { desc = 'Show references' }))
+    vim.keymap.set('n', '<leader>lD', vim.lsp.buf.declaration, vim.tbl_extend('force', opts, { desc = 'Go to declaration' }))
 	-- These attcch to the native lsp instead of the telescope commands
     vim.keymap.set('n', 'K', vim.lsp.buf.hover, vim.tbl_extend('force', opts, { desc = 'Hover documentation' }))
-    vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, vim.tbl_extend('force', opts, { desc = 'Rename symbol' }))
-    vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, vim.tbl_extend('force', opts, { desc = 'Code action' }))
+    vim.keymap.set('n', '<leader>ln', vim.lsp.buf.rename, vim.tbl_extend('force', opts, { desc = 'Rename symbol' }))
+    vim.keymap.set('n', '<leader>la', vim.lsp.buf.code_action, vim.tbl_extend('force', opts, { desc = 'Code action' }))
   end,
 })
