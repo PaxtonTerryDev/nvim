@@ -3,8 +3,8 @@ vim.pack.add({
 })
 
 vim.opt.termguicolors = true
-vim.opt.background = 'light'
-vim.g.gruvbox_material_background = 'soft'
+vim.opt.background = 'dark'
+vim.g.gruvbox_material_background = 'medium'
 vim.g.gruvbox_material_foreground = 'material'
 
 vim.cmd('colorscheme gruvbox-material')
