@@ -5,10 +5,57 @@ vim.pack.add({
 })
 
 require("mason").setup()
-require("mason-lspconfig").setup()
+require("mason-lspconfig").setup({
+	ensure_installed = { "ts_ls", "rust_analyzer", "gopls", "lua_ls" },
+	automatic_installation = true,
+})
+
+vim.lsp.config.ts_ls = {
+	cmd = { 'typescript-language-server', '--stdio' },
+	filetypes = { 'javascript', 'javascriptreact', 'typescript', 'typescriptreact' },
+	root_markers = { 'package.json', 'tsconfig.json', 'jsconfig.json', '.git' },
+}
+
+vim.lsp.config.rust_analyzer = {
+	cmd = { 'rust-analyzer' },
+	filetypes = { 'rust' },
+	root_markers = { 'Cargo.toml', '.git' },
+}
+
+vim.lsp.config.gopls = {
+	cmd = { 'gopls' },
+	filetypes = { 'go', 'gomod', 'gowork', 'gotmpl' },
+	root_markers = { 'go.mod', 'go.work', '.git' },
+}
+
+vim.lsp.config.lua_ls = {
+	cmd = { 'lua-language-server' },
+	filetypes = { 'lua' },
+	root_markers = { '.luarc.json', '.luarc.jsonc', '.luacheckrc', '.stylua.toml', 'stylua.toml', 'selene.toml', 'selene.yml', '.git' },
+}
+
+vim.lsp.enable('ts_ls')
+vim.lsp.enable('rust_analyzer')
+vim.lsp.enable('gopls')
+vim.lsp.enable('lua_ls')
+
+vim.diagnostic.config({
+	virtual_text = true,
+	signs = true,
+	underline = true,
+	update_in_insert = false,
+	severity_sort = true,
+	float = {
+		border = 'rounded',
+		source = 'always',
+		header = '',
+		prefix = '',
+	},
+})
 
 vim.keymap.set('n', '<leader>lf', vim.lsp.buf.format)
 vim.keymap.set('n', 'K', vim.lsp.buf.hover)
+vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float)
 
 vim.api.nvim_create_autocmd('LspAttach', {
 	callback = function(ev)

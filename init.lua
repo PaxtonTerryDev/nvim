@@ -14,6 +14,7 @@ vim.opt.smartcase = true
 vim.keymap.set('n', '<leader>pv', vim.cmd.Ex)
 vim.keymap.set('n', '<leader>w', ':write<CR>')
 vim.keymap.set('n', '<leader>q', ':quit<CR>')
+vim.keymap.set('n', '<leader>n', ':let @/ = ""<CR>')
 
 require("lsp")
 require("themes")
