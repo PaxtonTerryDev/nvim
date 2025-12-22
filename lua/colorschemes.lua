@@ -1,8 +1,8 @@
--- vim.pack.add({
---   { src = "https://github.com/vague-theme/vague.nvim" },
---   { src = "https://github.com/AlexvZyl/nordic.nvim" },
---   { src = "https://github.com/wnkz/monoglow.nvim" },
--- })
+vim.pack.add({
+  { src = "https://github.com/vague-theme/vague.nvim" },
+  { src = "https://github.com/AlexvZyl/nordic.nvim" },
+  { src = "https://github.com/wnkz/monoglow.nvim" },
+})
 
 -- ARCHIVE
 
@@ -16,12 +16,12 @@
 --   }
 -- })
 --
--- require("monoglow").setup({
---   transparent = true,
---   on_colors = function(colors)
---     colors.glow = honeyBronze
---   end
--- })
+require("monoglow").setup({
+  transparent = true,
+  on_colors = function(colors)
+    colors.glow = honeyBronze
+  end
+})
 --
 -- 
 -- require("colorschemes")
@@ -37,39 +37,6 @@
 -- local cl_softPeriwinkle = "#8F8FC9"
 -- local cl_evergreen = "#002E2C"
 -- 
--- 
--- -- -- comment: This is a comment
--- -- 
--- -- -- keyword: function, local, if, for, while, etc.
--- -- local function example()
--- --   -- string: Regular string literals
--- --   local str = "This is a string"
--- -- 
--- --   -- string_escape: Escape sequences inside strings
--- --   local escaped = "Line one\nLine two\ttab"
--- -- 
--- --   -- type: Type annotations or built-in type names
--- --   local num = 42
--- -- 
--- --   -- builtin: Built-in functions like print, require, etc.
--- --   print("Hello")
--- --   print(str)
--- --   print(escaped)
--- --   print(num)
--- -- 
--- --   -- keyword_return: The return keyword
--- --   return "value"
--- -- end
--- -- 
--- -- 
--- -- -- keyword_exception: Error handling keywords (pcall, error, etc.)
--- -- local success, err = pcall(function()
--- --   error("Something went wrong")
--- -- end)
--- -- 
--- -- example()
--- -- print(success)
--- -- print(err)
 -- 
 -- local lackluster = require("lackluster")
 -- local color = lackluster.color

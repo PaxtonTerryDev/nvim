@@ -1,4 +1,5 @@
-vim.cmd.colorscheme('pearl')
+require('colorschemes')
+vim.cmd.colorscheme('monoglow')
 
 vim.pack.add({
   { src = "https://github.com/neovim/nvim-lspconfig" },
