@@ -20,7 +20,9 @@ vim.pack.add({
 vim.g.mapleader = " "
 vim.keymap.set("n", "<leader>so", ":w<CR>:source ~/.config/nvim/init.lua<CR>")
 vim.keymap.set("n", "<leader>w", ":w<CR>", { desc = "Write file" })
-
+vim.keymap.set('n', '<leader>qq', ':q<CR>', { desc = "Quit"})
+vim.keymap.set('n', '<leader>qw', ':wq<CR>', { desc = "Save and quit"})
+vim.keymap.set('n', '<leader>qf', ':q!<CR>', { desc = "Force quit"})
 -- Center screen after scrolling
 vim.keymap.set("n", "<C-d>", "<C-d>zz")
 vim.keymap.set("n", "<C-u>", "<C-u>zz")
