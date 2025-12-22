@@ -98,7 +98,7 @@ local syntax = {
 	Boolean = { 2 },
 	Float = { 2 },
 	Identifier = { 4 },
-	Function = { 2 },
+	Function = { 1 },
 	Statement = { 2 },
 	Conditional = { 2 },
 	Repeat = { 2 },
@@ -301,9 +301,16 @@ local treesitter = {
 	["@nospell"] = {},
 }
 
+local html = {
+  htmlTag = { 1 },
+  tsxTag = { 1 },
+  tsxIntrinsicTagName = { 1 },
+}
+
 local flash = {
 	FlashLabel = { { fg = bg_color, bg = c.yellow, bold = true } },
 }
+
 highlight_group(syntax)
 highlight_group(editor)
 highlight_group(diff)
@@ -311,7 +318,9 @@ highlight_group(git)
 highlight_group(diagnostics)
 highlight_group(lsp)
 highlight_group(treesitter)
+highlight_group(html)
 highlight_group(flash)
+
 -- Mode-based statusline colors
 local function set_statusline_mode()
 	local mode = vim.fn.mode()
