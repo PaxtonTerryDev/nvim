@@ -9,13 +9,10 @@ local h = vim.api.nvim_set_hl
 local none = 'none'
 
 local c = {
-  obra = '#ebe5ce',
-  luster = '#ffffff',
-  gray = '#6A6759',
-  yellow = '#cfab4a',
-  blue = '#214F4B',
-  red = '#ff0d1a',
-  green = '#c2fe0b'
+  yellow = '#CFAB4A',
+  red = '#CF4A4A',
+  green = '#4ACF9A',
+  blue = '#4AA0CF'
 }
 
 local mono_color = {
@@ -93,7 +90,7 @@ local function highlight_group(group)
 end
 
 local syntax = {
-  Comment = { 8 },
+  Comment = { 8, { italic = true } },
   Constant = { 1 },
   String = { 3 },
   Character = { 3 },
@@ -122,12 +119,12 @@ local syntax = {
   SpecialChar = { 4 },
   Tag = { 3 },
   Delimiter = { 6 },
-  SpecialComment = { 7 },
+  SpecialComment = { 4 },
   Debug = { 4 },
   Underlined = { 4, { underline = true } },
   Ignore = { 9 },
   Error = { 1, { bold = true } },
-  Todo = { 1, { bold = true } },
+  Todo = { { fg = c.blue, bold = true } },
 }
 
 local editor = {
@@ -189,14 +186,14 @@ local git = {
 }
 
 local diagnostics = {
-  DiagnosticError = { 1 },
-  DiagnosticWarn = { 3 },
-  DiagnosticInfo = { 5 },
-  DiagnosticHint = { 6 },
-  DiagnosticUnderlineError = { 1, { undercurl = true } },
-  DiagnosticUnderlineWarn = { 3, { undercurl = true } },
-  DiagnosticUnderlineInfo = { 5, { undercurl = true } },
-  DiagnosticUnderlineHint = { 6, { undercurl = true } },
+  DiagnosticError = { { fg = c.red } },
+  DiagnosticWarn = { { fg = c.yellow } },
+  DiagnosticInfo = { { fg = c.blue } },
+  DiagnosticHint = { 8 },
+  DiagnosticUnderlineError = { { sp = c.red, undercurl = true } },
+  DiagnosticUnderlineWarn = { { sp = c.yellow, undercurl = true } },
+  DiagnosticUnderlineInfo = { { sp = c.blue,  undercurl = true } },
+  DiagnosticUnderlineHint = { 8, { undercurl = true } },
 }
 
 local lsp = {
@@ -206,11 +203,11 @@ local lsp = {
 }
 
 local treesitter = {
-  ['@variable'] = { 5 },
-  ['@variable.builtin'] = { 3 },
-  ['@variable.parameter'] = { 4 },
-  ['@variable.parameter.builtin'] = { 3 },
-  ['@variable.member'] = { 4 },
+  ['@variable'] = { 1 },
+  ['@variable.builtin'] = { 1 },
+  ['@variable.parameter'] = { 2 },
+  ['@variable.parameter.builtin'] = { 2 },
+  ['@variable.member'] = { 1 },
   ['@constant'] = { 1 },
   ['@constant.builtin'] = { 1 },
   ['@constant.macro'] = { 2 },
@@ -227,16 +224,16 @@ local treesitter = {
   ['@string.special.path'] = { 4 },
   ['@character'] = { 3 },
   ['@character.special'] = { 4 },
-  ['@boolean'] = { 2 },
-  ['@number'] = { 2 },
-  ['@number.float'] = { 2 },
-  ['@type'] = { 3 },
-  ['@type.builtin'] = { 3 },
-  ['@type.definition'] = { 3 },
+  ['@boolean'] = { 1 },
+  ['@number'] = { 1 },
+  ['@number.float'] = { 1 },
+  ['@type'] = { 1 },
+  ['@type.builtin'] = { 1 },
+  ['@type.definition'] = { 1 },
   ['@attribute'] = { 4 },
   ['@attribute.builtin'] = { 4 },
   ['@property'] = { 4 },
-  ['@function'] = { 2 },
+  ['@function'] = { 1 },
   ['@function.builtin'] = { 2 },
   ['@function.call'] = {},
   ['@function.macro'] = { 3 },
@@ -244,15 +241,15 @@ local treesitter = {
   ['@function.method.call'] = { 2 },
   ['@constructor'] = { 2 },
   ['@operator'] = { 5 },
-  ['@keyword'] = { 2 },
-  ['@keyword.coroutine'] = { 2 },
-  ['@keyword.function'] = { 2 },
+  ['@keyword'] = { 4 },
+  ['@keyword.coroutine'] = { 4 },
+  ['@keyword.function'] = { 4 },
   ['@keyword.operator'] = { 2 },
-  ['@keyword.import'] = { 2 },
-  ['@keyword.type'] = { 2 },
+  ['@keyword.import'] = { 4 },
+  ['@keyword.type'] = { 4 },
   ['@keyword.modifier'] = { 3 },
   ['@keyword.repeat'] = { 2 },
-  ['@keyword.return'] = { 2 },
+  ['@keyword.return'] = { 1 },
   ['@keyword.debug'] = { 2 },
   ['@keyword.exception'] = { 2 },
   ['@keyword.conditional'] = { 2 },
@@ -264,8 +261,8 @@ local treesitter = {
   ['@punctuation.bracket'] = { 6 },
   ['@punctuation.special'] = { 5 },
   ['@comment'] = { 8 },
-  ['@comment.documentation'] = { 7 },
-  ['@comment.error'] = { 1, { bold = true } },
+  ['@comment.documentation'] = { { fg = '#2D6242' } },
+  ['@comment.error'] = { 4, { bold = true } },
   ['@comment.warning'] = { 3, { bold = true } },
   ['@comment.todo'] = { 1, { bold = true } },
   ['@comment.note'] = { 4 },
