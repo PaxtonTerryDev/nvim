@@ -1,0 +1,87 @@
+{
+  "article-frontmatter": {
+    "prefix": "article",
+    "body": [
+      "---",
+      "title: \"${1:Article Title}\"",
+      "description: \"${2:Article description}\"",
+      "publishDate: \"${3:2024-01-01}\"",
+      "author: \"Paxton Terry\"",
+      "tags: [${4:\"tag1\", \"tag2\"}]",
+      "---",
+      "",
+      "# ${1:Article Title}",
+      "",
+      "${0}"
+    ],
+    "description": "MDX article with frontmatter metadata"
+  },
+  "article-metadata": {
+    "prefix": "meta",
+    "body": [
+      "export const metadata = {",
+      "  title: '${1:Article Title}',",
+      "  description: '${2:Article description}',",
+      "  authors: [{ name: 'Paxton Terry', url: '${3:https://yoursite.com}' }],",
+      "  openGraph: {",
+      "    images: ['${4:https://cdn.example.com/image.jpg}'],",
+      "  },",
+      "}",
+      "",
+      "# ${1:Article Title}",
+      "",
+      "${0}"
+    ],
+    "description": "MDX metadata export for Next.js"
+  },
+  "article-full": {
+    "prefix": "fullpost",
+    "body": [
+      "---",
+      "title: \"${1:Article Title}\"",
+      "description: \"${2:Article description}\"",
+      "publishDate: \"${3:2024-01-01}\"",
+      "author: \"Paxton Terry\"",
+      "tags: [${4:\"tag1\", \"tag2\"}]",
+      "---",
+      "",
+      "export const metadata = {",
+      "  title: '${1:Article Title}',",
+      "  description: '${2:Article description}',",
+      "  authors: [{ name: 'Paxton Terry', url: '${5:https://paxtonterry.com}' }],",
+      "}",
+      "",
+      "# ${1:Article Title}",
+      "",
+      "${0}"
+    ],
+    "description": "Full MDX article with both frontmatter and metadata export"
+  },
+  "section": {
+    "prefix": "sec",
+    "body": [
+      "## ${1:Section Title}",
+      "",
+      "${0}"
+    ],
+    "description": "Section heading"
+  },
+  "subsection": {
+    "prefix": "subsec",
+    "body": [
+      "### ${1:Subsection Title}",
+      "",
+      "${0}"
+    ],
+    "description": "Subsection heading"
+  },
+  "code-block": {
+    "prefix": "code",
+    "body": [
+      "```${1:typescript}",
+      "${0}",
+      "```"
+    ],
+    "description": "Code block"
+  }
+}
