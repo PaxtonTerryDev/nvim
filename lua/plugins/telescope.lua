@@ -44,6 +44,22 @@ return {
       set_leader_keymap('fr', builtin.oldfiles, 'recent files')
       set_leader_keymap('fb', builtin.buffers, 'buffers')
 
+      vim.keymap.set('n', '<leader>fm', function()
+        builtin.marks { mark_type = 'local' }
+      end, { desc = 'marks (local)' })
+
+      vim.keymap.set('n', '<leader>fM', function()
+        builtin.marks { mark_type = 'global' }
+      end, { desc = 'marks (global)' })
+
+      vim.keymap.set('n', '<leader>fF', function()
+        builtin.find_files { hidden = true }
+      end, { desc = 'files (hidden)' })
+
+      vim.keymap.set('n', '<leader>fG', function()
+        builtin.live_grep { additional_args = { '--hidden' } }
+      end, { desc = 'live grep (hidden)' })
+
       vim.keymap.set('n', '<leader>/', function()
         builtin.current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
           winblend = 10,

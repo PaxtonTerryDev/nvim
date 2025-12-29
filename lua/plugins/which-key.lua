@@ -1,7 +1,8 @@
 local groups = {
 	{ "f", group = "Find" },
 	{ "l", group = "LSP" },
-	{ "t", group = "Terminal" }
+	{ "t", group = "Terminal" },
+  { "c", group = "Comments" }
 }
 
 return {

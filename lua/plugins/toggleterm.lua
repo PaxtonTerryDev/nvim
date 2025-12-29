@@ -52,9 +52,27 @@ return {
         vim.cmd('ToggleTerm direction=float')
       end
 
+      local lazygit = Terminal:new({
+        cmd = "lazygit",
+        direction = "float",
+        hidden = true,
+        on_open = function(term)
+          vim.cmd("startinsert!")
+          vim.api.nvim_buf_set_keymap(term.bufnr, "n", "q", "<cmd>close<CR>", {noremap = true, silent = true})
+          vim.api.nvim_buf_set_keymap(term.bufnr, "n", "i", "i", {noremap = true, silent = true})
+          vim.api.nvim_buf_set_keymap(term.bufnr, "n", "a", "a", {noremap = true, silent = true})
+          vim.api.nvim_buf_set_keymap(term.bufnr, "t", "<esc>", "<esc>", {noremap = true, silent = true})
+        end,
+      })
+
+      local function toggle_lazygit()
+        lazygit:toggle()
+      end
+
       vim.keymap.set('n', '<leader>tt', toggle_horizontal, { desc = 'horizontal' })
       vim.keymap.set('n', '<leader>tv', toggle_vertical, { desc = 'vertical' })
       vim.keymap.set('n', '<leader>tf', toggle_float, { desc = 'floating' })
+      vim.keymap.set('n', '<leader>gg', toggle_lazygit, { desc = 'lazygit' })
     end,
   }
 }
