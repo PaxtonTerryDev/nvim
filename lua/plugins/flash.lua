@@ -3,7 +3,13 @@ return {
 		"folke/flash.nvim",
 		event = "VeryLazy",
 		---@type Flash.Config
-		opts = {},
+		opts = {
+			label = {
+				after = false,
+				before = true,
+        style = "inline"
+			},
+		},
 		keys = {
 			{
 				"z",
@@ -21,14 +27,14 @@ return {
 				end,
 				desc = "Flash Treesitter",
 			},
-      {
-        "s",
-        mode = { "n", "x", "o" },
-        function()
-          require("flash").jump({ pattern = vim.fn.expand("<cword>"), })
-        end,
-        desc = "Search word under cursor"
-      },
+			{
+				"s",
+				mode = { "n", "x", "o" },
+				function()
+					require("flash").jump({ pattern = vim.fn.expand("<cword>") })
+				end,
+				desc = "Search word under cursor",
+			},
 			{
 				"r",
 				mode = "o",
