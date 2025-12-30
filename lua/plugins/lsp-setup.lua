@@ -132,16 +132,15 @@ return {
 			})
 
 			local capabilities = require("blink.cmp").get_lsp_capabilities()
+			local lspconfig = require("lspconfig")
 			local servers = {
 				ts_ls = {
-					root_dir = require("lspconfig").util.root_pattern({ "package.json", "tsconfig.json" }),
+					root_dir = lspconfig.util.root_pattern("package.json", "tsconfig.json"),
 					single_file_support = false,
-					settings = {},
 				},
 				denols = {
-					root_dir = require("lspconfig").util.root_pattern({ "deno.json", "deno.jsonc" }),
+					root_dir = lspconfig.util.root_pattern("deno.json", "deno.jsonc"),
 					single_file_support = false,
-					settings = {},
 				},
 				marksman = {
 					filetypes = { "markdown", "mdx" },
@@ -171,14 +170,14 @@ return {
 			require("mason-lspconfig").setup({
 				ensure_installed = {},
 				automatic_installation = false,
-				handlers = {
-					function(server_name)
-						local server = servers[server_name] or {}
-						server.capabilities = vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {})
-						require("lspconfig")[server_name].setup(server)
-					end,
-				},
 			})
+
+			for server_name, server_config in pairs(servers) do
+				local config = vim.tbl_deep_extend("force", {
+					capabilities = capabilities,
+				}, server_config)
+				require("lspconfig")[server_name].setup(config)
+			end
 		end,
 	},
 }

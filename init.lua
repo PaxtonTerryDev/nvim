@@ -28,3 +28,4 @@ vim.keymap.set("n", "<C-l>", "<C-w>l", { desc = "Move to right split" })
 
 -- Clear search highlights
 vim.keymap.set("n", "<Esc><Esc>", ":nohlsearch<CR>", { desc = "Clear search highlights" })
+
