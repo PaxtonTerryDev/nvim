@@ -32,7 +32,7 @@ return {
 					map("<leader>la", vim.lsp.buf.code_action, "execute code action", { "n", "x" })
 					map("<leader>lr", require("telescope.builtin").lsp_references, "find references")
 					map("<leader>li", require("telescope.builtin").lsp_implementations, "find implementations")
-					map("<leader>ld", require("telescope.builtin").lsp_definitions, "go to definition")
+					map("<leader>ld", vim.lsp.buf.definition, "go to definition")
 					map("<leader>lD", vim.lsp.buf.declaration, "go to declaration")
 					map("<leader>lO", require("telescope.builtin").lsp_document_symbols, "open document symbols")
 					map(
