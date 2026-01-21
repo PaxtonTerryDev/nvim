@@ -1,15 +1,6 @@
-local groups = {
-	{ "f", group = "Find" },
-	{ "l", group = "LSP" },
-	{ "t", group = "Terminal" },
-  { "c", group = "Comments" }
-}
-
-return {
-	{
-		"folke/which-key.nvim",
-		event = "VimEnter",
-		opts = {
+import("folke/which-key.nvim")
+local wk = require("which-key")
+wk.setup({
 			delay = 0,
 			icons = {
 				mappings = vim.g.have_nerd_font,
@@ -46,6 +37,5 @@ return {
 			},
 
 			spec = groups,
-		},
-	},
-}
+		})
+vim.keymap.set("n", "<leader>?", function() wk.show({global = false}) end, { desc = "Buffer local keymaps" })

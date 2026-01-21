@@ -1,0 +1,28 @@
+{
+  "errorClass": {
+    "prefix": "errorClass",
+    "body": [
+      "class ${1: Error Name} extends Error {",
+      "  override message: string;",
+      "",
+      "  constructor(message: string) {",
+      "    super(message)",
+      "    this.message = message;",
+      "  }",
+      "}"
+    ],
+    "description": "Custom Error class with asserted message value"
+  },
+  "constructorClass": {
+    "prefix": "constructorClass",
+    "body": [
+      "class $1 $2 {",
+      "  $0",
+      "",
+      "  constructor() {",
+      "",
+      "  }",
+      "}"
+    ]
+  }
+}

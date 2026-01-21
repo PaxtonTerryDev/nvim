@@ -1,0 +1,6 @@
+{
+  "TODO": {
+    "prefix": "td",
+    "body": "TODO: $1"
+  }
+}
