@@ -28,7 +28,8 @@ vim.lsp.enable({
   'jsonls',
   'gopls',
   'rust_analyzer',
-  'prismals'
+  'prismals',
+  'marksman'
 })
 
 vim.api.nvim_create_autocmd("LspAttach", {

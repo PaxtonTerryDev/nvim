@@ -99,7 +99,6 @@ vim.keymap.set("n", "<Esc><Esc>", ":nohlsearch<CR>", { desc = "Clear search high
 -- KEYMAPS: UTILITIES
 vim.keymap.set("n", "<leader>p", '"+p', { desc = "[Paste] from clipboard" })
 vim.keymap.set("i", "<C-p>", '<C-r>"', { desc = "[Paste] from buffer" })
-vim.keymap.set("i", "<C-v>", '<C-r>+', { desc = "[Paste] from system clipboard" })
 vim.keymap.set("v", "<leader>y", '"+y', { desc = "[Yank] to clipboard" })
 vim.keymap.set("n", "<leader>y", '"+Y', { desc = "[Yank] line to clipboard" })
 vim.keymap.set("n", "<leader>Y", 'gg0vG$"+y', { desc = "[Yank] whole file" })
