@@ -24,5 +24,16 @@
       "  }",
       "}"
     ]
+  },
+  "nextRouteHandler": {
+    "prefix": "nextroute",
+    "body": [
+      "export async function $1(",
+      "  request: Request,",
+      "  { params }: { params: Promise<{ $2 }> }",
+      ") {",
+      "  const { $0 } = await params;",
+      "}"
+    ]
   }
 }
