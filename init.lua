@@ -68,6 +68,8 @@ require("plugins.harpoon")
 require("plugins.buffer-tabs")
 require("plugins.comment")
 require("plugins.nvim-tree")
+require("plugins.toggleterm")
+
 --require("plugins.files")
 -- require("plugins.map")
 -- require("plugins.animate")
@@ -96,8 +98,13 @@ vim.keymap.set("n", "<leader>so", ":w<CR>:source ~/.config/nvim/init.lua<CR>", {
 vim.keymap.set("n", "<leader>w", ":w<CR>", { desc = "Write file" })
 vim.keymap.set("n", "<Esc><Esc>", ":nohlsearch<CR>", { desc = "Clear search highlights" })
 
+-- KEYMAPS: BUFFERS / EXITING
+vim.keymap.set("n", "<leader>qq", ":qa<CR>", { desc = "Close Neovim" })
+vim.keymap.set("n", "<leader>qf", ":bd<CR>", { desc = "Close Neovim (FORCE)" })
+vim.keymap.set("n", "<leader>qb", ":bd<CR>", { desc = "Clse current buffer" })
+
 -- KEYMAPS: UTILITIES
-vim.keymap.set("n", "<leader>p", '"+p', { desc = "[Paste] from clipboard" })
+vim.keymap.set("n", "<leader>p", '"+p', { desc = "[Paste] frm clipboard" })
 vim.keymap.set("i", "<C-p>", '<C-r>"', { desc = "[Paste] from buffer" })
 vim.keymap.set("i", "<C-v>", '<C-r>+', { desc = "[Paste] from system clipboard" })
 vim.keymap.set("v", "<leader>y", '"+y', { desc = "[Yank] to clipboard" })
