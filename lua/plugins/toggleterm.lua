@@ -1,7 +1,7 @@
 vim.cmd("packadd toggleterm.nvim")
 
 require("toggleterm").setup{
-  open_mapping = [[<c-`>]],
+  open_mapping = [[<leader>tt]],
 }
 
 local Terminal  = require('toggleterm.terminal').Terminal
@@ -9,6 +9,7 @@ local lazygit = Terminal:new({
   cmd = "lazygit",
   dir = "git_dir",
   direction = "float",
+  count = 99,
   float_opts = {
     border = "double",
   },
@@ -23,20 +24,34 @@ local lazygit = Terminal:new({
   end,
 })
 
+local split_term_count = 1
+
 function _lazygit_toggle()
   lazygit:toggle()
 end
 
+function _new_split_term()
+  split_term_count = split_term_count + 1
+  Terminal:new({
+    direction = "horizontal",
+    count = split_term_count,
+  }):toggle()
+end
+
 vim.api.nvim_set_keymap("n", "<leader>g", "<cmd>lua _lazygit_toggle()<CR>", {noremap = true, silent = true})
+vim.api.nvim_set_keymap("n", "<leader>ts", "<cmd>lua _new_split_term()<CR>", {noremap = true, silent = true})
 
 function _G.set_terminal_keymaps()
   local opts = {noremap = true}
-  vim.api.nvim_buf_set_keymap(0, 't', '<esc>', [[<C-\><C-n>]], opts)
+  if not string.find(vim.api.nvim_buf_get_name(0), "lazygit") then
+    vim.api.nvim_buf_set_keymap(0, 't', '<esc>', [[<C-\><C-n>]], opts)
+  end
   -- vim.api.nvim_buf_set_keymap(0, 't', 'jk', [[<C-\><C-n>]], opts)
   vim.api.nvim_buf_set_keymap(0, 't', '<C-h>', [[<C-\><C-n><C-W>h]], opts)
   vim.api.nvim_buf_set_keymap(0, 't', '<C-j>', [[<C-\><C-n><C-W>j]], opts)
   vim.api.nvim_buf_set_keymap(0, 't', '<C-k>', [[<C-\><C-n><C-W>k]], opts)
   vim.api.nvim_buf_set_keymap(0, 't', '<C-l>', [[<C-\><C-n><C-W>l]], opts)
+
 end
 
 vim.cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')
