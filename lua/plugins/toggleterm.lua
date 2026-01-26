@@ -17,10 +17,11 @@ local lazygit = Terminal:new({
   on_open = function(term)
     vim.cmd("startinsert!")
     vim.api.nvim_buf_set_keymap(term.bufnr, "n", "q", "<cmd>close<CR>", {noremap = true, silent = true})
+    vim.o.timeoutlen = 0
   end,
-  -- function to run on closing the terminal
   on_close = function(term)
     vim.cmd("startinsert!")
+    vim.o.timeoutlen = 300
   end,
 })
 

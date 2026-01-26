@@ -90,8 +90,16 @@ map_multistep("i", "<BS>", { "minipairs_bs" })
 local mode = { "i", "c", "x", "s" }
 map_combo(mode, "jk", "<BS><BS><Esc>")
 map_combo(mode, "kj", "<BS><BS><Esc>")
-map_combo("t", "jk", "<BS><BS><C-\\><C-n>")
-map_combo("t", "kj", "<BS><BS><C-\\><C-n>")
+map_combo("t", "jk", function()
+  if not string.find(vim.api.nvim_buf_get_name(0), "lazygit") then
+    vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<BS><BS><C-\\><C-n>", true, false, true), "n", false)
+  end
+end)
+map_combo("t", "kj", function()
+  if not string.find(vim.api.nvim_buf_get_name(0), "lazygit") then
+    vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<BS><BS><C-\\><C-n>", true, false, true), "n", false)
+  end
+end)
 
 -- KEYMAPS: EDITOR
 vim.keymap.set("n", "<leader>so", ":w<CR>:source ~/.config/nvim/init.lua<CR>", { desc = "Shout out" })
