@@ -11,12 +11,17 @@ map_multistep("i", "<BS>", { "minipairs_bs" })
 local mode = { "i", "c", "x", "s" }
 map_combo(mode, "jk", "<BS><BS><Esc>")
 map_combo(mode, "kj", "<BS><BS><Esc>")
-map_combo("t", "jk", "<BS><BS><C-\\><C-n>")
-map_combo("t", "kj", "<BS><BS><C-\\><C-n>")
+-- map_combo("t", "jk", "<BS><BS><C-\\><C-n>")
+-- map_combo("t", "kj", "<BS><BS><C-\\><C-n>")
 
 -- KEYMAPS: EDITOR
 vim.keymap.set("n", "<leader>so", ":w<CR>:source ~/.config/nvim/init.lua<CR>", { desc = "Shout out" })
 vim.keymap.set("n", "<leader>w", ":w<CR>", { desc = "Write file" }) vim.keymap.set("n", "<Esc><Esc>", ":nohlsearch<CR>", { desc = "Clear search highlights" })
+
+vim.keymap.set("n", "<leader>qq", ":qa<CR>", { desc = "Close Neovim" }) vim.keymap.set("n", "<Esc><Esc>", ":nohlsearch<CR>", { desc = "Clear search highlights" })
+vim.keymap.set("n", "<leader>qf", ":w<CR>:bd<CR>", { desc = "Close current file" }) vim.keymap.set("n", "<Esc><Esc>", ":nohlsearch<CR>", { desc = "Clear search highlights" })
+vim.keymap.set("n", "<leader>qf", ":bd<CR>", { desc = "Close current buffer" }) vim.keymap.set("n", "<Esc><Esc>", ":nohlsearch<CR>", { desc = "Clear search highlights" })
+
 -- KEYMAPS: UTILITIES
 vim.keymap.set("n", "<leader>p", '"+p', { desc = "[Paste] from clipboard" })
 vim.keymap.set("i", "<C-p>", '<C-r>"', { desc = "[Paste] from buffer" })
