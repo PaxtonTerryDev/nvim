@@ -22,6 +22,7 @@ vim.keymap.set("n", "<leader>fb", builtin.buffers, { desc = "[Find] Buffers" })
 vim.keymap.set("n", "<leader>fh", builtin.help_tags, { desc = "[Find] Help tags" })
 vim.keymap.set("n", "<leader>fk", builtin.keymaps, { desc = "[Find] Keymaps" })
 vim.keymap.set("n", "<leader>fd", builtin.diagnostics, { desc = "[Find] Diagnostics" })
+vim.keymap.set("n", "<leader>lr", builtin.lsp_references, { desc = "LSP: Show references" })
 
 -- Find files including hidden files
 vim.keymap.set("n", "<leader>fF", function()
@@ -38,11 +39,9 @@ vim.keymap.set("n", "<leader>fG", function()
   end,
   { desc = "[Find] Grep (hidden)" })
 
-      vim.keymap.set('n', '<leader>/', function()
-        builtin.current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
-          winblend = 10,
-          previewer = false,
-        })
-      end, { desc = 'current buffer' })
-
-
+vim.keymap.set('n', '<leader>/', function()
+  builtin.current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
+    winblend = 10,
+    previewer = false,
+  })
+end, { desc = 'current buffer' })
