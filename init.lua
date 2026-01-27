@@ -4,20 +4,6 @@ end
 
 require("options")
 require("lsp")
-
---
--- COLORSCHEME
---
--- Clears the colorschemes background color
--- vim.api.nvim_create_autocmd("ColorScheme", {
---   pattern = "*",
---   callback = function()
---     vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
---     vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
---     vim.api.nvim_set_hl(0, "NormalNC", { bg = "none" })
---   end,
--- })
-
 require("colorschemes.melange")
 
 --
@@ -40,41 +26,14 @@ vim.diagnostic.config({
     source = "always",
     header = "",
     prefix = "",
-    wrap = true,  -- Wrap long lines in float
+    wrap = true,    -- Wrap long lines in float
     max_width = 80, -- Set max width for readability
   },
 })
 
---
--- PLUGINS
---
+require("plugins")
 
--- I'm just importing mini here so I don't need to in the init modules
-import("nvim-mini/mini.nvim")
--- Mini direct imports
-require("mini.icons").setup()
-require("mini.statusline").setup()
---Plugins
-require("plugins.telescope")
-require("plugins.around")
-require("plugins.autopairs")
-require("plugins.completion")
-require("plugins.flash")
-require("plugins.which-key")
-require("plugins.todo-comments")
-require("plugins.surround")
-require("plugins.snippets")
-require("plugins.harpoon")
-require("plugins.buffer-tabs")
-require("plugins.comment")
-require("plugins.nvim-tree")
---require("plugins.files")
--- require("plugins.map")
--- require("plugins.animate")
---
--- KEYMAPS
---
-
+local telescope_builtin = require("telescope.builtin")
 -- Mini.Keymaps
 require("mini.keymap").setup()
 local map_multistep = require("mini.keymap").map_multistep
@@ -123,8 +82,8 @@ vim.keymap.set("n", "<C-l>", "<C-w>l", { desc = "Move to right split" })
 
 -- KEYMAPS: LSP
 vim.keymap.set("n", "<leader>ld", vim.lsp.buf.definition, { desc = "LSP: Go to definition" })
-vim.keymap.set("n", "<leader>lD", vim.lsp.buf.declaration, { desc = "LSP: Go to declaration" })
-vim.keymap.set("n", "<leader>lr", vim.lsp.buf.references, { desc = "LSP: Show references" })
+vim.keymap.set("n", "<leader>lD", telescope_builtin.lsp_declarations, { desc = "LSP: Go to declaration" })
+vim.keymap.set("n", "<leader>lr", telescope_builtin.lsp_references, { desc = "LSP: Show references" })
 vim.keymap.set("n", "<leader>li", vim.lsp.buf.implementation, { desc = "LSP: Go to implementation" })
 vim.keymap.set("n", "<leader>lt", vim.lsp.buf.type_definition, { desc = "LSP: Type definition" })
 vim.keymap.set("n", "<leader>lh", vim.lsp.buf.hover, { desc = "LSP: Hover documentation" })
@@ -144,7 +103,7 @@ end, { desc = "LSP: Restart" })
 
 -- KEYMAPS: FLASH
 local flash = require("flash")
-vim.keymap.set("n", "z", function() flash.jump() end, { desc = "[Flash] Search"})
+vim.keymap.set("n", "z", function() flash.jump() end, { desc = "[Flash] Search" })
 
 -- KEYMAPS: HARPOON
 local mark = require('harpoon.mark')
