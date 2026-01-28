@@ -15,7 +15,7 @@ vim.o.timeoutlen = 300
 vim.o.splitright = true
 vim.o.splitbelow = true
 vim.o.swapfile = false
-vim.o.wrap = true
+vim.o.wrap = false
 vim.o.linebreak = true
 -- vim.o.list = true
 -- vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
