@@ -21,9 +21,8 @@ vim.cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')
 
 local Terminal = require('toggleterm.terminal').Terminal
 
-function create_terminal(cfg)
-  return Terminal:new({
-    cmd = cfg.cmd or "",
+local function create_terminal(cfg)
+  local opts = {
     dir = cfg.dir or "git_dir",
     count = cfg.count,
     direction = cfg.direction or "horizontal",
@@ -32,48 +31,136 @@ function create_terminal(cfg)
     },
     on_open = cfg.on_open or function(_) vim.cmd("startinsert!") end,
     on_close = cfg.on_close or function(_) end,
-  })
+  }
+  if cfg.cmd and cfg.cmd ~= "" then
+    opts.cmd = cfg.cmd
+  end
+  return Terminal:new(opts)
+end
+
+local CLAUDE_INSTANCE = -1
+
+local function toggle_instance(instance)
+  instance:toggle()
+end
+
+local function handle_claude(instance)
+  if CLAUDE_INSTANCE == -1 then
+    CLAUDE_INSTANCE = instance.count
+    toggle_instance(instance)
+  else
+    vim.cmd(string.format("%sToggleTerm", CLAUDE_INSTANCE))
+  end
+end
+
+local function create_floating_shell_config(c)
+  local gen_keymap = string.format("<A-%s>", c)
+  local horizontal_shell_config = {
+    instance = create_terminal({
+      count = c,
+      direction = "float",
+      on_open = function(term)
+        vim.cmd("startinsert!")
+        vim.keymap.set("t", "<Esc>", "<Esc>", { buffer = term.bufnr, noremap = true, silent = true })
+        vim.keymap.set("t", "<CR>", "<CR>", { buffer = term.bufnr, noremap = true, silent = true })
+      end,
+    }),
+    keymap = gen_keymap,
+    invoker = toggle_instance,
+    invoker_modes = {"n", "t"}
+  }
+  return horizontal_shell_config
+end
+
+local function create_horizontal_shell_config(c)
+  local gen_keymap = string.format("<A-%s>", c)
+  local horizontal_shell_config = {
+    instance = create_terminal({
+      direction = "horizontal",
+      count = c,
+      on_open = function(term)
+        vim.cmd("startinsert!")
+        vim.keymap.set("t", "<Esc>", "<Esc>", { buffer = term.bufnr, noremap = true, silent = true })
+        vim.keymap.set("t", "<CR>", "<CR>", { buffer = term.bufnr, noremap = true, silent = true })
+      end,
+    }),
+    keymap = gen_keymap
+  }
+  return horizontal_shell_config
+end
+
+local function set_map(def) local modes = def.invoker_modes or "n" vim.keymap.set(modes, def.keymap, function() def.invoker(def.instance) end, { noremap = true, silent = true })
 end
 
 local terminals = {
   lazygit = {
     instance = create_terminal({
       cmd = "lazygit",
-      count = 4,
+      count = 97,
       direction = "float",
       on_open = function(term)
         vim.cmd("startinsert!")
-        vim.api.nvim_buf_set_keymap(term.bufnr, { "t", "i", "n" }, "<C-m>", "<cmd>close<CR>",
-          { noremap = true, silent = true })
-        vim.api.nvim_buf_set_keymap(term.bufnr, "t", "<Esc>", "<Esc>", { noremap = true, silent = true })
+        vim.keymap.set({ "t", "i", "n" }, "<C-m>", "<cmd>close<CR>",
+          { buffer = term.bufnr, noremap = true, silent = true })
+        vim.keymap.set("t", "<Esc>", "<Esc>", { buffer = term.bufnr, noremap = true, silent = true })
+        vim.keymap.set("t", "<CR>", "<CR>", { buffer = term.bufnr, noremap = true, silent = true })
       end,
     }),
     keymap = "<leader>g",
+    invoker = toggle_instance
   },
   claude = {
     instance = create_terminal({
       cmd = "claude",
-      count = 5,
+      count = 98,
       direction = "float",
       on_open = function(term)
         vim.cmd("startinsert!")
-        vim.api.nvim_buf_set_keymap(term.bufnr, "n", "<C-m>", "<cmd>close<CR>", { noremap = true, silent = true })
-        vim.api.nvim_buf_set_keymap(term.bufnr, "t", "<Esc>", "<Esc>", { noremap = true, silent = true })
+        vim.keymap.set("n", "<C-m>", "<cmd>close<CR>", { buffer = term.bufnr, noremap = true, silent = true })
+        vim.keymap.set("t", "<Esc>", "<Esc>", { buffer = term.bufnr, noremap = true, silent = true })
       end,
     }),
     keymap = "<leader>m",
+    invoker = handle_claude
+  },
+  claude_continue = {
+    instance = create_terminal({
+      cmd = "claude --continue",
+      count = 99,
+      direction = "float",
+      on_open = function(term)
+        vim.cmd("startinsert!")
+        vim.keymap.set("n", "<C-m>", "<cmd>close<CR>", { buffer = term.bufnr, noremap = true, silent = true })
+        vim.keymap.set("t", "<Esc>", "<Esc>", { buffer = term.bufnr, noremap = true, silent = true })
+      end,
+    }),
+    keymap = "<leader>M",
+    invoker = handle_claude
   },
 }
 
-local function toggle_instance(instance) if type(instance) == "table" and instance.toggle then instance:toggle() elseif type(instance) == "table" then for _, t in ipairs(instance) do t:toggle() end end end
+set_map(terminals.lazygit)
+set_map(terminals.claude)
+set_map(terminals.claude_continue)
 
-for _, term in pairs(terminals) do
-  vim.keymap.set("n", term.keymap, function() toggle_instance(term.instance) end, { noremap = true, silent = true })
+local floating_shell_1 = create_floating_shell_config(1)
+local floating_shell_2 = create_floating_shell_config(2)
+local floating_shell_3 = create_floating_shell_config(3)
+
+set_map(floating_shell_1)
+set_map(floating_shell_2)
+set_map(floating_shell_3)
+
+local bottom_shell_1 = create_horizontal_shell_config(4)
+local bottom_shell_2 = create_horizontal_shell_config(5)
+local bottom_shell_3 = create_horizontal_shell_config(6)
+
+local function toggle_bottom_terminals()
+  bottom_shell_1:toggle()
+  bottom_shell_2:toggle()
+  bottom_shell_3:toggle()
 end
 
-function toggle_shells()
-  vim.cmd("ToggleTerm direction=horizontal name=1")
-  vim.cmd("ToggleTerm direction=horizontal name=2")
-  vim.cmd("ToggleTerm direction=horizontal name=3")
-end
-vim.keymap.set("n", "<leader>t", function() toggle_shells() end, { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>t", function() toggle_bottom_terminals() end,
+    { noremap = true, silent = true })
+
