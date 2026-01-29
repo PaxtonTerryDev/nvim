@@ -1,5 +1,9 @@
 {
   "plugins": {
+    "Abstract-cs": {
+      "rev": "94e77787c0380fed9944e6f57c3db00e79d69fdb",
+      "src": "https://github.com/Abstract-IDE/Abstract-cs"
+    },
     "buffer_manager.nvim": {
       "rev": "a39ab3851a5487ac39cac4be43715b69349b8df7",
       "src": "https://github.com/j-morano/buffer_manager.nvim"
@@ -36,6 +40,10 @@
       "rev": "ce42f6b629beeaa00591ba73a77d3eeac4cf28ce",
       "src": "https://github.com/savq/melange-nvim"
     },
+    "miasma.nvim": {
+      "rev": "627f2e1cac91de0d1d4dd7472b506a30f41b2b7d",
+      "src": "https://github.com/xero/miasma.nvim"
+    },
     "mini.nvim": {
       "rev": "dca98843fab66d080779cd973e7139e258ff164c",
       "src": "https://github.com/nvim-mini/mini.nvim"
@@ -67,6 +75,14 @@
     "plenary.nvim": {
       "rev": "b9fd5226c2f76c951fc8ed5923d85e4de065e509",
       "src": "https://github.com/nvim-lua/plenary.nvim"
+    },
+    "slack.nvim": {
+      "rev": "8c7589b2bb303bdc08114a22c5e697bb9f66eb55",
+      "src": "https://github.com/ntk148v/slack.nvim"
+    },
+    "sonokai": {
+      "rev": "b023c5280b16fe2366f5e779d8d2756b3e5ee9c3",
+      "src": "https://github.com/sainnhe/sonokai"
     },
     "telescope-ui-select.nvim": {
       "rev": "6e51d7da30bd139a6950adf2a47fda6df9fa06d2",

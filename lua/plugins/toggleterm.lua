@@ -88,7 +88,7 @@ local terminals = {
   lazygit = {
     instance = create_terminal({
       cmd = "lazygit",
-      count = 97,
+      count = 96,
       direction = "float",
       on_open = function(term)
         vim.cmd("startinsert!")
@@ -99,6 +99,22 @@ local terminals = {
       end,
     }),
     keymap = "<leader>g",
+    invoker = toggle_instance
+  },
+  lazydocker = {
+    instance = create_terminal({
+      cmd = "lazydocker",
+      count = 97,
+      direction = "float",
+      on_open = function(term)
+        vim.cmd("startinsert!")
+        vim.keymap.set({ "t", "i", "n" }, "<C-m>", "<cmd>close<CR>",
+          { buffer = term.bufnr, noremap = true, silent = true })
+        vim.keymap.set("t", "<Esc>", "<Esc>", { buffer = term.bufnr, noremap = true, silent = true })
+        vim.keymap.set("t", "<CR>", "<CR>", { buffer = term.bufnr, noremap = true, silent = true })
+      end,
+    }),
+    keymap = "<leader>d",
     invoker = toggle_instance
   },
   claude = {

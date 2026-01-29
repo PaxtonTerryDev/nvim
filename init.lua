@@ -4,8 +4,7 @@ end
 
 require("options")
 require("lsp")
--- require("colorschemes.lackluster")
-vim.cmd.colorscheme("pearl")
+require("colorschemes")
 require("diagnostics")
 require("plugins")
 require("keymaps")
