@@ -1,11 +1,13 @@
 import("akinsho/toggleterm.nvim")
 
+local vertical_width_percentage = 0.25
+
 require("toggleterm").setup {
   open_mapping = [[<c-\>]],
   close_on_exit = true,
   direction = "vertical",
   size = function()
-    return vim.o.columns * 0.3
+    return vim.o.columns * vertical_width_percentage
   end
 }
 
@@ -102,9 +104,8 @@ local terminals = {
   claude = {
     instance = create_terminal({
       cmd = "claude",
-      size = function(term) return vim.o.columns * 0.3 end,
       count = 98,
-      direction = "float",
+      direction = "vertical",
       on_open = function(term)
         vim.cmd("startinsert!")
         vim.keymap.set("n", "<C-m>", "<cmd>close<CR>", { buffer = term.bufnr, noremap = true, silent = true })
@@ -117,9 +118,8 @@ local terminals = {
   claude_continue = {
     instance = create_terminal({
       cmd = "claude --continue",
-      size = function(term) return vim.o.columns * 0.3 end,
       count = 99,
-      direction = "float",
+      direction = "vertical",
       on_open = function(term)
         vim.cmd("startinsert!")
         vim.keymap.set("n", "<C-m>", "<cmd>close<CR>", { buffer = term.bufnr, noremap = true, silent = true })
