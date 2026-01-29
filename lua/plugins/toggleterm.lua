@@ -3,6 +3,7 @@ import("akinsho/toggleterm.nvim")
 require("toggleterm").setup {
   open_mapping = [[<c-\>]],
   close_on_exit = true,
+  direction = "float",
 }
 
 function _G.set_terminal_keymaps()
@@ -53,7 +54,7 @@ local function handle_claude(instance)
   end
 end
 
-local function create_floating_shell_config(c)
+local function floating_config(c)
   local gen_keymap = string.format("<A-%s>", c)
   local horizontal_shell_config = {
     instance = create_terminal({
@@ -67,29 +68,15 @@ local function create_floating_shell_config(c)
     }),
     keymap = gen_keymap,
     invoker = toggle_instance,
-    invoker_modes = {"n", "t"}
+    invoker_modes = { "n", "t" }
   }
   return horizontal_shell_config
 end
 
-local function create_horizontal_shell_config(c)
-  local gen_keymap = string.format("<A-%s>", c)
-  local horizontal_shell_config = {
-    instance = create_terminal({
-      direction = "horizontal",
-      count = c,
-      on_open = function(term)
-        vim.cmd("startinsert!")
-        vim.keymap.set("t", "<Esc>", "<Esc>", { buffer = term.bufnr, noremap = true, silent = true })
-        vim.keymap.set("t", "<CR>", "<CR>", { buffer = term.bufnr, noremap = true, silent = true })
-      end,
-    }),
-    keymap = gen_keymap
-  }
-  return horizontal_shell_config
-end
 
-local function set_map(def) local modes = def.invoker_modes or "n" vim.keymap.set(modes, def.keymap, function() def.invoker(def.instance) end, { noremap = true, silent = true })
+local function set_map(def)
+  local modes = def.invoker_modes or "n"
+  vim.keymap.set(modes, def.keymap, function() def.invoker(def.instance) end, { noremap = true, silent = true })
 end
 
 local terminals = {
@@ -112,6 +99,7 @@ local terminals = {
   claude = {
     instance = create_terminal({
       cmd = "claude",
+      size = function(term) return vim.o.columns * 0.3 end,
       count = 98,
       direction = "float",
       on_open = function(term)
@@ -126,6 +114,7 @@ local terminals = {
   claude_continue = {
     instance = create_terminal({
       cmd = "claude --continue",
+      size = function(term) return vim.o.columns * 0.3 end,
       count = 99,
       direction = "float",
       on_open = function(term)
@@ -139,28 +128,18 @@ local terminals = {
   },
 }
 
-set_map(terminals.lazygit)
-set_map(terminals.claude)
-set_map(terminals.claude_continue)
-
-local floating_shell_1 = create_floating_shell_config(1)
-local floating_shell_2 = create_floating_shell_config(2)
-local floating_shell_3 = create_floating_shell_config(3)
-
-set_map(floating_shell_1)
-set_map(floating_shell_2)
-set_map(floating_shell_3)
-
-local bottom_shell_1 = create_horizontal_shell_config(4)
-local bottom_shell_2 = create_horizontal_shell_config(5)
-local bottom_shell_3 = create_horizontal_shell_config(6)
-
-local function toggle_bottom_terminals()
-  bottom_shell_1:toggle()
-  bottom_shell_2:toggle()
-  bottom_shell_3:toggle()
+local function create_floating_terminals(num)
+  for i = 1, num do
+    set_map(floating_config(i))
+  end
 end
 
-vim.keymap.set("n", "<leader>t", function() toggle_bottom_terminals() end,
-    { noremap = true, silent = true })
+local function create_custom_terminals()
+  for _, value in pairs(terminals) do
+    set_map(value)
+  end
+end
 
+
+create_floating_terminals(3)
+create_custom_terminals()
