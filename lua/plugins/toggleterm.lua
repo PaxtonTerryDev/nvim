@@ -3,7 +3,10 @@ import("akinsho/toggleterm.nvim")
 require("toggleterm").setup {
   open_mapping = [[<c-\>]],
   close_on_exit = true,
-  direction = "float",
+  direction = "vertical",
+  size = function()
+    return vim.o.columns * 0.3
+  end
 }
 
 function _G.set_terminal_keymaps()
